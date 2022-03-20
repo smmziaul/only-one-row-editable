@@ -51,7 +51,7 @@ const EditableCell = ({
   row: { index },
   column: { id },
   updateMyData, // This is a custom function that we supplied to our table instance
-  editableRowIndex
+  editableRowIndex // index of the row we requested for editing
 }) => {
   // We need to keep and update the state of the cell normally
   const [value, setValue] = React.useState(initialValue);
@@ -128,7 +128,7 @@ const EnhancedTable = ({
       updateMyData,
       // pass state variables so that we can access them in edit hook later
       editableRowIndex,
-      setEditableRowIndex
+      setEditableRowIndex // setState hook for toggling edit on/off switch
     },
     useGlobalFilter,
     useSortBy,
@@ -170,12 +170,11 @@ const EnhancedTable = ({
               onClick={() => {
                 const currentIndex = row.index;
                 if (editableRowIndex !== currentIndex) {
-                  // request for edit access
+                  // row requested for edit access
                   setEditableRowIndex(currentIndex);
                 } else {
-                  // request for saving the updated entity
+                  // request for saving the updated row
                   setEditableRowIndex(null);
-                  // call update api with updatedEntity
                   const updatedRow = row.values;
                   console.log("updated row values:");
                   console.log(updatedRow);
